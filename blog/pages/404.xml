@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page>
+	<setting><name>pagetitle</name><value>page not found</value></setting>
+	<setting><name>description</name><value></value></setting>
+	<setting><name>style</name><value>default</value></setting>
+	<setting><name>template</name><value>default</value></setting>
+	
+	<trail><link></link><value>page not found</value></trail>
+	
+	<content><value>templates/page/trail</value></content>
+</page>

@@ -1,0 +1,17 @@
+Options +FollowSymlinks
+RewriteEngine On
+
+RewriteRule ^do/([^/]+)/([^/]+)/$ action.php?class=$1&method=$2 [QSA]
+RewriteRule ^admin/ admin/index.php [QSA]
+
+RewriteCond %{REQUEST_URI} !/public/
+RewriteCond %{REQUEST_URI} !/do/
+RewriteCond %{REQUEST_URI} !/admin/
+RewriteCond %{REQUEST_URI} !/themes/
+RewriteCond %{REQUEST_URI} !/js/
+RewriteCond %{REQUEST_URI} !/files/
+RewriteCond %{REQUEST_URI} !action\.php
+RewriteCond %{REQUEST_URI} !index\.php
+RewriteCond %{REQUEST_URI} !\.htpasswd
+
+RewriteRule ^ public/index.php [QSA]
