@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
 	<entry><name>sitetheme</name><value>default</value></entry>
-	<entry><name>sitetitle</name><value>band-base</value></entry>
+	<entry><name>sitetitle</name><value>oop mvc blog</value></entry>
 	<entry><name>debug</name><value>off</value></entry>
 	<entry><name>dbtype</name><value>pdo</value></entry>
 	<entry><name>dbhost</name><value>localhost</value></entry>
