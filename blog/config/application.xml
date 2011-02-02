@@ -8,9 +8,9 @@
 	<entry><name>dbname</name><value>****</value></entry>
 	<entry><name>dbuser</name><value>****</value></entry>
 	<entry><name>dbpswd</name><value>****</value></entry>
-	<entry><name>scriptpath</name><value>community/public/js/</value></entry>
-	<entry><name>pagespath</name><value>community/pages/</value></entry>
-	<entry><name>templatespath</name><value>community/</value></entry>
-	<entry><name>filespath</name><value>community/files/</value></entry>
-	<entry><name>themespath</name><value>community/public/themes/</value></entry>
+	<entry><name>scriptpath</name><value>blog/public/js/</value></entry>
+	<entry><name>pagespath</name><value>blog/pages/</value></entry>
+	<entry><name>templatespath</name><value>blog/</value></entry>
+	<entry><name>filespath</name><value>blog/files/</value></entry>
+	<entry><name>themespath</name><value>blog/public/themes/</value></entry>
 </config>
