@@ -1,7 +1,11 @@
 #summary how to use singletons for configuration of the application
 
-=the singleton pattern=
+==The singleton pattern==
+Singletons are classes of which you can create only one instance. It makes sense to store configuration settings in a singleton because (atleast in most cases) you want your application to use only one set of configuration settings. Once the singleton has been instantiated and the properties of the singleton have been set you can retrieve these properties from anywhere in your application.
 
+It is easy to recognize singletons in an application because singletons will always have a private constructor and a static property called "instance" (in most cases anyways).
+
+==The code==
 {{{
 <?php
 
@@ -36,3 +40,30 @@ class models_Config {
 	
 }
 }}}
+
+As you can see the `__construct()` function is private. In the `getInstance()` function a check is performed to see if the static property `_instance` is empty, if it is empty the private constructor is called and the instance of `Config` is now stored in the static `_instance` property.
+
+In the `load()` function I load a predifined path to an xml file that holds all the configuration settings, these settings are then stored in the `_properties` array.
+
+The call to the `getInstance()` function is made in the Main class
+{{{
+$this->cfg = models_Config::getInstance();
+$this->cfg->load(new string($docroot. $config . 'application.xml'));
+$this->cfg->set('siteroot', $siteroot);
+$this->cfg->set('docroot', $docroot);
+$this->cfg->set('sitename', $sitename);
+$this->cfg->set('pageuri', str_replace($this->cfg->get('siteroot'), '', array_shift(explode('?', 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']))));
+}}}
+
+As you can see not all config settings are stored in the xml file. some settings like the `siteroot`, `docroot`, `sitename` and `pageuri` are defined in the Main class. This helps to make the application more "portable" (it will be able to run from different servers without any changes to the files, for example I can run this application on my localhost but also on a test server on the web without any changes in the code)
+
+In the rest of the application I can now reach the config settings by doing this:
+{{{
+$cfg = models_Config::getInstance();
+}}}
+
+and then:
+{{{
+$dbprefix = $cfg->get('dbprfx');
+}}}
+for example.
