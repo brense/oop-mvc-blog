@@ -3,7 +3,7 @@
 class autoload_AutoLoader {
 	public static $instance;
 	private $_src=array('application/', 'library/', 'library/datatypes/');
-	private $_ext=array('.php', 'class.php', 'lib.php');
+	private $_ext=array('.php', '.class.php', '.lib.php');
 	
 	/* initialize the autoloader class */
 	public static function init($src=NULL,$ext=NULL){
@@ -26,9 +26,19 @@ class autoload_AutoLoader {
 		global $docroot;
 		$class=str_replace('_', '/', $class);
 		spl_autoload_extensions(implode(',', $this->_ext));
+		$success = false;
 		foreach($this->_src as $resource){
+			foreach($this->_ext as $ext){
+				if(file_exists($docroot . $resource . $class . $ext)){
+					$success = true;
+				}
+			}
 			set_include_path($docroot . $resource);
 			spl_autoload($class);
+
+		}
+		if(!$success){
+			throw new Exception('class ' . $class . ' not found');
 		}
 	}
 	
@@ -36,12 +46,19 @@ class autoload_AutoLoader {
 	private function dirty($class){
 		global $docroot;
 		$class=str_replace('_', '/', $class);
+		$success = false;
 		foreach($this->_src as $resource){
 			foreach($this->_ext as $ext){
+				if(file_exists($docroot . $resource . $class . $ext)){
+					$success = true;
+				}
 				@include($docroot . $resource . $class . $ext);
 			}
 		}
 		spl_autoload($class);
+		if(!$success){
+			throw new Exception('class ' . $class . ' not found');
+		}
 	}
 
 }

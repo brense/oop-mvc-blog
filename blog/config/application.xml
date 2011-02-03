@@ -2,7 +2,7 @@
 <config>
 	<entry><name>sitetheme</name><value>default</value></entry>
 	<entry><name>sitetitle</name><value>oop mvc blog</value></entry>
-	<entry><name>debug</name><value>off</value></entry>
+	<entry><name>debug</name><value>on</value></entry>
 	<entry><name>dbtype</name><value>pdo</value></entry>
 	<entry><name>dbhost</name><value>localhost</value></entry>
 	<entry><name>dbname</name><value>****</value></entry>
