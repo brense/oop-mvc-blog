@@ -1,0 +1,77 @@
+#summary How to autoload classes in PHP
+
+==The concept of autloading==
+Some people put all classes in one file and include that at the beginning of their application. This is a big waste of resources since the application will propably not use more then 10% of the code that was just included for 50% of the operations it has to perform.
+
+Most people (thank god) put each class in a seperate file. In PHP they now have a different problem. Ofcourse you can just include all the different files at the beginning of the application but this is ugly and still a waste of resources. In most other languages classes are loaded automatically when needed (although you do have to import class sources in most languages) but in PHP you have to provide your own autoloading function or class. In the past 3 years I've been using several different ways to autload my classes and today I am pretty happy with the classes that I am using.
+
+==The autoloader class==
+{{{
+<?php
+
+class autoload_AutoLoader {
+	public static $instance;
+	private $_src=array('application/', 'library/', 'library/datatypes/');
+	private $_ext=array('.php', 'class.php', 'lib.php');
+	
+	/* initialize the autoloader class */
+	public static function init($src=NULL,$ext=NULL){
+		if(self::$instance==NULL){
+			self::$instance=new self($src,$ext);
+		}
+		return self::$instance;
+	}
+	
+	/* put the custom functions in the autoload register when the class is initialized */
+	private function __construct($src=NULL,$ext=NULL){
+		if(is_array($src)){$this->_src=$src;}
+		if(is_array($ext)){$this->_ext=$ext;}
+		spl_autoload_register(array($this, 'clean'));
+		spl_autoload_register(array($this, 'dirty'));
+	}
+	
+	/* the clean method to autoload the class without any includes, works in most cases */
+	private function clean($class){
+		global $docroot;
+		$class=str_replace('_', '/', $class);
+		spl_autoload_extensions(implode(',', $this->_ext));
+		foreach($this->_src as $resource){
+			set_include_path($docroot . $resource);
+			spl_autoload($class);
+		}
+	}
+	
+	/* the dirty method to autoload the class after including the php file containing the class */
+	private function dirty($class){
+		global $docroot;
+		$class=str_replace('_', '/', $class);
+		foreach($this->_src as $resource){
+			foreach($this->_ext as $ext){
+				@include($docroot . $resource . $class . $ext);
+			}
+		}
+		spl_autoload($class);
+	}
+
+}
+}}}
+
+Now... How to autoload the autoloader...
+
+Ok so you still have to include the autoloader manually and then create an instance of it. Ofcourse I applied the singleton pattern on the Autoloader class, whats the use of having two instances of the autoloader? Including and instantiating is done in the index.php which is the "beginning" or "bootstrap" of the application.
+
+{{{
+<?php
+/* site configuration */
+$sitename = 'blog';
+$config = 'blog/config/';
+$docroot=$_SERVER['DOCUMENT_ROOT'] . implode('/',array_slice(explode('/',$_SERVER['PHP_SELF']),0,-3)) . '/';
+$siteroot='http://' . $_SERVER['HTTP_HOST'] . implode('/',array_slice(explode('/',$_SERVER['PHP_SELF']),0,-3)) . '/';
+
+/* initialize autoloader */
+include($docroot.'library/autoload/Autoloader.php');
+autoload_AutoLoader::init(array('community/custom/', 'application/', 'library/', 'library/datatypes/'));
+
+/* start the application */
+$app = new models_Main($docroot, $siteroot, $sitename, $config);
+}}}
