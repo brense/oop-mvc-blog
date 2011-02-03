@@ -21,7 +21,7 @@ class models_Config {
 		}
 	}
 	
-	public function set($name,$value){
+	public function set($name, $value){
 		$this->_properties[$name]=$value;
 	}
 	

@@ -1,7 +1,7 @@
 <?php
 /* site configuration */
-$sitename = 'community';
-$config = 'community/config/';
+$sitename = 'blog';
+$config = 'blog/config/';
 $docroot=$_SERVER['DOCUMENT_ROOT'] . implode('/',array_slice(explode('/',$_SERVER['PHP_SELF']),0,-3)) . '/';
 $siteroot='http://' . $_SERVER['HTTP_HOST'] . implode('/',array_slice(explode('/',$_SERVER['PHP_SELF']),0,-3)) . '/';
 
