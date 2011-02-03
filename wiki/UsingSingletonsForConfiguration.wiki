@@ -1,4 +1,6 @@
-#summary how to use singletons for configuration
+#summary how to use singletons for configuration of the application
+
+=the singleton pattern=
 
 {{{
 <?php
