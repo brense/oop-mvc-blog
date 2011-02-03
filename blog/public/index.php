@@ -7,7 +7,7 @@ $siteroot='http://' . $_SERVER['HTTP_HOST'] . implode('/',array_slice(explode('/
 
 /* initialize autoloader */
 include($docroot.'library/autoload/Autoloader.php');
-autoload_AutoLoader::init(array('community/custom/', 'application/', 'library/', 'library/datatypes/'));
+autoload_AutoLoader::init(array('blog/custom/', 'application/', 'library/', 'library/datatypes/'));
 
 /* start the application */
 $app = new models_Main($docroot, $siteroot, $sitename, $config);
