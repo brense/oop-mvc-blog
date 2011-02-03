@@ -10,17 +10,11 @@ Most people (thank god) put each class in a seperate file. In PHP they now have 
 <?php
 
 class autoload_AutoLoader {
-	public static $instance;
-	private $_src=array('application/', 'library/', 'library/datatypes/');
-	private $_ext=array('.php', 'class.php', 'lib.php');
 	
-	/* initialize the autoloader class */
-	public static function init($src=NULL,$ext=NULL){
-		if(self::$instance==NULL){
-			self::$instance=new self($src,$ext);
-		}
-		return self::$instance;
-	}
+	public static $instance;
+	private $_class;
+	private $_src=array('application/', 'library/', 'library/datatypes/');
+	private $_ext=array('.php', '.class.php', '.lib.php');
 	
 	/* put the custom functions in the autoload register when the class is initialized */
 	private function __construct($src=NULL,$ext=NULL){
@@ -30,27 +24,53 @@ class autoload_AutoLoader {
 		spl_autoload_register(array($this, 'dirty'));
 	}
 	
-	/* the clean method to autoload the class without any includes, works in most cases */
-	private function clean($class){
+	/* initialize the autoloader class */
+	public static function init($src=NULL,$ext=NULL){
+		if(self::$instance==NULL){
+			self::$instance=new self($src,$ext);
+		}
+		return self::$instance;
+	}
+	
+	/* throw error if the class cannot be found */
+	private function checkFile($class){
 		global $docroot;
-		$class=str_replace('_', '/', $class);
-		spl_autoload_extensions(implode(',', $this->_ext));
+		$this->_class = str_replace('_', '/', $class);
+		$success = false;
 		foreach($this->_src as $resource){
-			set_include_path($docroot . $resource);
-			spl_autoload($class);
+			foreach($this->_ext as $ext){
+				if(file_exists($docroot . $resource . $this->_class . $ext)){
+					$success = true;
+				}
+			}
+		}
+		if(!$success){
+			throw new Exception('class ' . $class . ' not found');
 		}
 	}
 	
-	/* the dirty method to autoload the class after including the php file containing the class */
+	/* the clean method to autoload the class without any includes */
+	private function clean($class){
+		global $docroot;
+		$this->checkFile($class);
+		spl_autoload_extensions(implode(',', $this->_ext));
+		foreach($this->_src as $resource){
+			set_include_path($docroot . $resource);
+			spl_autoload($this->_class);
+
+		}
+	}
+	
+	/* the dirty method to autoload the class when the clean method has failed */
 	private function dirty($class){
 		global $docroot;
-		$class=str_replace('_', '/', $class);
+		$this->checkFile($class);
 		foreach($this->_src as $resource){
 			foreach($this->_ext as $ext){
-				@include($docroot . $resource . $class . $ext);
+				@include($docroot . $resource . $this->_class . $ext);
 			}
 		}
-		spl_autoload($class);
+		spl_autoload($this->_class);
 	}
 
 }
