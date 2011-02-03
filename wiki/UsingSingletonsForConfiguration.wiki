@@ -1,7 +1,7 @@
 #summary how to use singletons for configuration of the application
 
 ==The singleton pattern==
-Singletons are classes of which you can create only one instance. It makes sense to store configuration settings in a singleton because (atleast in most cases) you want your application to use only one set of configuration settings. Once the singleton has been instantiated and the properties of the singleton have been set you can retrieve these properties from anywhere in your application.
+Singletons are classes of which you can create only one instance. It makes sense to store configuration settings in a singleton because (atleast in most cases) you want your application to use only one set of configuration settings. Once the singleton has been instantiated and the properties of the singleton have been set you can retrieve these properties from anywhere in your application. for more info see the wikipedia article about the singleton pattern http://en.wikipedia.org/wiki/Singleton_pattern
 
 It is easy to recognize singletons in an application because singletons will always have a private constructor and a static property called "instance" (in most cases anyways).
 
