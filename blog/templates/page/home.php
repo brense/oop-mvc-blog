@@ -17,32 +17,12 @@ if(is_array($this->scripts)){
 </head>
 <body>
 
-<div id="usernav" class="part">
-	<div class="wrapper">
-<?php
-include($this->cfg->get('docroot') . $this->cfg->get('templatespath') . 'templates/users/usernav.php');
-print "\n";
-?>
-	</div>
-</div>
 <div id="header" class="part">
 	<div id="header-main">
 		<div class="wrapper">
 			<div class="holder">
 <?php
 include($this->cfg->get('docroot') . $this->cfg->get('templatespath') . 'templates/page/header.php');
-print "\n";
-?>
-			</div>
-		</div>
-	</div>
-	<div id="header-sub">
-		<div class="wrapper">
-			<div class="holder">
-<?php
-include($this->cfg->get('docroot') . $this->cfg->get('templatespath') . 'templates/bands/newest.php');
-include($this->cfg->get('docroot') . $this->cfg->get('templatespath') . 'templates/albums/newest.php');
-include($this->cfg->get('docroot') . $this->cfg->get('templatespath') . 'templates/users/announcements.php');
 print "\n";
 ?>
 			</div>

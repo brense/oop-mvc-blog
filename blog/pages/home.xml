@@ -5,12 +5,6 @@
 	<setting><name>style</name><value>default</value></setting>
 	<setting><name>template</name><value>home</value></setting>
 	
-	<content><value>templates/page/trail</value></content>
-	<content><value>templates/events/upcoming</value></content>
-	<content><value>templates/news/widget</value></content>
-	<content><value><![CDATA[<div class="devider"></div>]]></value></content>
-	<content><value>templates/bands/featured</value></content>
-	<content><value>templates/albums/featured</value></content>
-	<content><value>templates/art/featured</value></content>
+	<content><value>hello</value></content>
 
 </page>

@@ -89,22 +89,6 @@ class models_Main {
 		/* translate template output */
 		$this->output=$input;
 		
-		$forumModel = new models_forum_Forum();
-		//$forumModel->id = '3';
-		$forumModel->title = 'test';
-		$forumModel->description = 'desc';
-		$forumModel->rules = 'rules';
-		$forumModel->date = '1234';
-		$forumModel->owner = '1';
-		$forumModel->status = 'active';
-		
-		$forumMapper = new models_forum_mappers_ForumMapper();
-		//$forumMapper->save($forumModel);
-		//$test = $forumMapper->get(array('id' => '3'));
-		
-		//$forumMapper->delete($test[0]);
-		
-		$forumMapper->emptyTable();
 	}
 	
 }

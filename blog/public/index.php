@@ -22,10 +22,3 @@ $app = new models_Main($docroot, $siteroot, $sitename, $config);
 
 /* print the output to the screen */
 print $app->output;
-
-/* debug mode */
-if($app->cfg->get('debug')=='on'){
-	print "\n<pre>\n";
-	print_r($app);
-	print "\n</pre>";
-}
