@@ -5,9 +5,9 @@
 	<entry><name>debug</name><value>on</value></entry>
 	<entry><name>dbtype</name><value>pdo</value></entry>
 	<entry><name>dbhost</name><value>localhost</value></entry>
-	<entry><name>dbname</name><value>****</value></entry>
-	<entry><name>dbuser</name><value>****</value></entry>
-	<entry><name>dbpswd</name><value>****</value></entry>
+	<entry><name>dbname</name><value>blog</value></entry>
+	<entry><name>dbuser</name><value>blog</value></entry>
+	<entry><name>dbpswd</name><value>blog</value></entry>
 	<entry><name>scriptpath</name><value>blog/public/js/</value></entry>
 	<entry><name>pagespath</name><value>blog/pages/</value></entry>
 	<entry><name>templatespath</name><value>blog/</value></entry>

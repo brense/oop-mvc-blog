@@ -1,60 +1,17 @@
 <?php
 
-/**
- * the main application class
- * @package models
- */
 class models_Main {
 	
-	/**
-     * will hold the config singleton object
-     * @access public
-     * @var models_Config
-     */
 	public $cfg;
-	
-	/**
-     * will hold the browser singleton object
-     * @access public
-     * @var models_Browser
-     */
 	public $browser;
-	
-	/**
-     * will hold the page object
-     * @access public
-     * @var models_Page
-     */
 	public $page;
-	
-	/**
-     * array with script objects
-     * @access public
-     * @var array
-     */
 	public $scripts;
-	
-	/**
-     * will hold the output
-     * @access public
-     * @var string
-     */
 	public $output;
 	
-	/**
-     * main constructor
-	 * @param string $docroot
-	 * @param string $siteroot
-     */
 	public function __construct($docroot, $siteroot, $sitename, $config){
 		$this->init($docroot, $siteroot, $sitename, $config);
 	}
-	
-	/**
-     * initializes the application
-	 * @param string $docroot
-	 * @param string $siteroot
-     */
+
 	private function init($docroot, $siteroot, $sitename, $config){
 		/* init site configuration */
 		$this->cfg = models_Config::getInstance();
@@ -82,13 +39,7 @@ class models_Main {
 		$input = ob_get_contents();
 		ob_end_clean();
 		
-		/* get parsed output */
-		//$tpl=new controllers_TemplateController($this->scripts);
-		//$tpl->parse($this->page, $this->page->content);
-		
-		/* translate template output */
-		$this->output=$input;
-		
+		$this->output = $input;
 	}
 	
 }
