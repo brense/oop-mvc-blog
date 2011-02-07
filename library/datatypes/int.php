@@ -7,7 +7,7 @@ class int extends DataType {
 			$this->_value = (string)$value;		 
 		}
 		else {
-			$this->_value = '"'.$value.'" is not an integer';
+			throw new Exception($value . ' is not a integer');
 		}
 	}
 	

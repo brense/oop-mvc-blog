@@ -7,7 +7,7 @@ class float extends DataType {
 			$this->_value = (string)$value;		 
 		}
 		else {
-			$this->_value = '"'.$value.'" is not a float';
+			throw new Exception($value . ' is not a float');
 		}
 	}
 	

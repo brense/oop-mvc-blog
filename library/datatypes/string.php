@@ -7,7 +7,7 @@ class string extends DataType {
 			$this->_value = (string)$value;		 
 		}
 		else {
-			$this->_value = '"'.$value.'" is not a string';
+			throw new Exception($value . ' is not a string');
 		}
 	}
 	

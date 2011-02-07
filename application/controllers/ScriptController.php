@@ -6,6 +6,9 @@ class controllers_ScriptController {
 	private $_scripts;
 	
 	public function __construct($path){
+		if(!is_dir($path)){
+			throw new Exception('scriptpath "' . $path . '" not found');
+		}
 		$this->_scriptpath=$path;
 	}
 	

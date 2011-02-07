@@ -40,6 +40,15 @@ class models_Main {
 		ob_end_clean();
 		
 		$this->output = $input;
+		
+		/* do blog stuff */
+		$postModel = new blog_models_Post();
+		$postController = new blog_controllers_PostController($postModel);
+		$postsView = new blog_views_PostsView($postModel, $postController);
+		$postModel->addObserver($postsView);
+		
+		$postsView->render();
+		
 	}
 	
 }

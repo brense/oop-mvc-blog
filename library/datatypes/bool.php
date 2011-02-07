@@ -7,7 +7,7 @@ class bool extends DataType {
 			$this->_value = (string)$value;		 
 		}
 		else {
-			$this->_value = '"'.$value.'" is not a boolean';
+			throw new Exception($value . ' is not a boolean');
 		}
 	}
 	

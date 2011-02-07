@@ -15,8 +15,8 @@ class models_Page {
 	public function getInstance(string $file, string $uri, string $uriparts){
 		$cfg=models_Config::getInstance();
 		
-		if(@$xml=simplexml_load_file($file)); // load page
-		else{$xml=simplexml_load_file($cfg->get('docroot') . $cfg->get('pagespath') . '404.xml');} // page not found
+		if(@$xml = simplexml_load_file($file)); // load page
+		else{$xml = simplexml_load_file($cfg->get('docroot') . $cfg->get('pagespath') . '404.xml');} // page not found
 		
 		// set the page properties
 		foreach($xml->setting as $setting){

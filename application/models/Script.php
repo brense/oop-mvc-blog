@@ -10,9 +10,13 @@ class models_Script {
 	public function __construct($script){
 		$this->_name=$script;
 		$cfg=models_Config::getInstance();
-		$this->_type=mimetypes_MimeTypes::get($cfg->get('docroot') . $cfg->get('sitename') . '/' . $cfg->get('scriptpath') . $this->_name);
+		$file = $cfg->get('docroot') . $cfg->get('scriptpath') . $this->_name;
+		if(!file_exists($file)){
+			throw new Exception('script "' . $file . '" not found');
+		}
+		$this->_type=mimetypes_MimeTypes::get($file);
 		$this->_location=$cfg->get('siteroot') . $cfg->get('scriptpath');
-		$this->_content=$this->contentHash($cfg->get('docroot') . $cfg->get('sitename') . '/' . $cfg->get('scriptpath') . $this->_name);
+		$this->_content=$this->contentHash($file);
 	}
 	
 	private function contentHash($file){

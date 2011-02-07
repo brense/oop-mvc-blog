@@ -1,6 +1,6 @@
 <?php
 
-class controllers_blog_PostController extends controllers_AbstractController {
+class blog_controllers_PostController extends controllers_AbstractController {
 	
 	private $_posts = array();
 	private $_post;
@@ -9,10 +9,10 @@ class controllers_blog_PostController extends controllers_AbstractController {
 		parent::__construct($model);
 	}
 	
-	public function indexAction(){
-		$postMapper = new models_blog_mappers_PostMapper();
+	public function getPosts($crits = NULL, $sort = NULL, $limit = NULL){
+		$postMapper = new blog_models_mappers_PostMapper();
 		$this->_posts = $postMapper->getPosts($crits, $sort, $limit);
-		return $this->_forums;
+		return $this->_posts;
 	}
 	
 	public function addAction(){
@@ -28,7 +28,7 @@ class controllers_blog_PostController extends controllers_AbstractController {
 	}
 		
 	public function postMapperOpperations($opperation){
-		$postMapper = new models_blog_mappers_PostMapper();
+		$postMapper = new blog_models_mappers_PostMapper();
 		switch($opperation){
 			case 'create':
 				$postMapper->createTable();

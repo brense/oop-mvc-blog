@@ -1,8 +1,8 @@
 <?php
 
-class models_blog_mappers_PostMapper extends models_mappers_AbstractMapper {
+class blog_models_mappers_PostMapper extends models_mappers_AbstractMapper {
 	
-	protected $_table = 'posts';
+	protected $_table = 'blog_posts';
 	
 	public function __construct(){
 		parent::__construct();
@@ -24,12 +24,12 @@ class models_blog_mappers_PostMapper extends models_mappers_AbstractMapper {
 		
 	}
 	
-	public function save(models_blog_Post $object, $action = NULL, $crits = NULL){
+	public function save(blog_models_Post $object, $action = NULL, $crits = NULL){
 		$this->_array = $this->toArray($object);
 		parent::save($action, $crits);
 	}
 	
-	public function delete(models_blog_Post $object){
+	public function delete(blog_models_Post $object){
 		$this->_array = $this->toArray($object);
 		$this->_handle->delete(array('id' => $this->_array['id']));
 	}
